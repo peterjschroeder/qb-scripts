@@ -5,4 +5,4 @@ downloadAll	Downloads all links matching user inputed regex.
 
 openLinks	Opens all links in new tabs, with optional user inputed regex.
 
-qbfsync Add, delete, list, sync Firefox bookmarks using firefox-sync-client.
+qbfsync,qbfsync-add Add, delete, list, sync Firefox bookmarks using firefox-sync-client.
