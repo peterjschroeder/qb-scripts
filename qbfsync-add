@@ -1,0 +1,2 @@
+#!/bin/bash
+qbfsync add "$QUTE_TITLE" $QUTE_URL
