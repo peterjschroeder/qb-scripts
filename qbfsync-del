@@ -1,0 +1,2 @@
+#!/bin/bash
+/home/$USER/$XDG_CONFIG_HOME/.local/share/qutebrowser/userscripts/qbfsync del "$1"
