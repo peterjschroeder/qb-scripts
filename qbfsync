@@ -80,14 +80,22 @@ def bookmark_delete(bookmark):
 
 # FIXME: Force qutebrowser to reload bookmarks
 def bookmark_list():
-    with open(os.path.join(xdg_config_home, "qutebrowser", "bookmarks", "urls"), 'w') as f:
-        out_str = 'ffsclient bookmarks list --type="bookmark" --no-table-truncate --table-columns="uri,title"'
-        output = subprocess.check_output(shlex.split(out_str), encoding="utf-8").split('\n')
+    b = []
+    out_str = 'ffsclient bookmarks list --type="bookmark" --no-table-truncate --table-columns="uri,title"'
+    output = subprocess.check_output(shlex.split(out_str), encoding="utf-8").split('\n')
 
-        for num, i in enumerate(output):
-            if num == 0 or num == 1 or num == len(output)-1:
-                continue
-            f.write('%s %s\n' % (i.split(' ', 1)[0].strip(), i.split(' ', 1)[1].strip()))
+    for num, i in enumerate(output):
+        if num == 0 or num == 1 or num == len(output)-1:
+            continue
+        b.append([i.split(' ', 1)[0].strip(), i.split(' ', 1)[1].strip()])
+
+    with open(os.path.join(xdg_config_home, "qutebrowser", "bookmarks", "urls"), 'w') as f:
+        for i in b:
+            f.write('%s %s\n' % (i[0], i[1]))
+
+    with open(os.path.join(xdg_config_home, "qutebrowser", "quickmarks"), 'w') as f:
+        for i in b:
+            f.write('%s %s\n' % (i[1], i[0]))
 
 def main():
     if len(sys.argv) == 1:
