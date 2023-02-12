@@ -1,2 +1,0 @@
-#!/bin/bash
-/home/$USER/$XDG_CONFIG_HOME/.local/share/qutebrowser/userscripts/qbfsync add "$QUTE_TITLE" $QUTE_URL "$1"

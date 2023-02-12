@@ -94,18 +94,14 @@ def main():
         print('qbfsync <add/del/list>')
     else:
         if sys.argv[1] == 'add':
-            if len(sys.argv) < 4:
-                print('qbfsync add <title> <url> <path>')
+            if not validators.url(os.getenv('QUTE_URL', '')):
+                print('Invalid url')
                 return
+            if len(sys.argv) < 3:
+                bookmark_add(os.getenv('QUTE_TITLE', ''), os.getenv('QUTE_URL', ''))
             else:
-                if not validators.url(sys.argv[3]):
-                    print('Invalid url')
-                    return
-                if len(sys.argv) < 5:
-                    bookmark_add(sys.argv[2], sys.argv[3])
-                else:
-                    bookmark_add(sys.argv[2], sys.argv[3], sys.argv[4].strip("/"))
-        elif sys.argv[1] == 'del' or sys.argv[1] == 'delete':
+                bookmark_add(os.getenv('QUTE_TITLE', ''), os.getenv('QUTE_URL', ''), sys.argv[2].strip("/"))
+        elif sys.argv[1] == 'del':
             if len(sys.argv) < 3:
                 print('qbfsync del <bookmark>')
                 return
